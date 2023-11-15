@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Set your preferred background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #e83e8c; /* Pink color */
+            color: white;
+            cursor: pointer;
+        }
+
+        h1, h4 {
+            color: black; /* Set your preferred text color */
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <h1>Login</h1>
+
+        <% if(typeof message !== 'undefined'){ %>
+            <h4 style="color: red;"><%= message %></h4>
+        <% } %>
+
+        <label for="email">Email:</label>
+        <input type="email" placeholder="Enter Email" name="email" required>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <br><br>
+
+        <input type="submit" value="Login">
+        <br><br>
+    </form>
+</body>
+</html>

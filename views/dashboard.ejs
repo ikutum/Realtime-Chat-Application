@@ -1,0 +1,106 @@
+<%- include('layouts/header.ejs')%>
+
+<style>
+    body {
+        background-color: #3a3131; /* Set your preferred background color */
+    }
+
+    /* You can also apply a background to a specific container if needed */
+    /* .dashboard-container {
+        background-image: url('path/to/your/image.jpg');  // Set the path to your background image
+        background-size: cover;
+        background-position: center;
+    } */
+</style>
+
+<h1 style="color: blue; font-weight: bold;">Welcome <%= user.name %></h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            <% if(users.length > 0){
+                for(let i = 0; i < users.length; i++){
+            %>
+            <li class="list-group-item list-group-item-dark cursor-pointer user-list" data-id="<%= users[i]._id %>">
+                <img src="<%= 'http://localhost:8000/'+users[i]['image'] %>" alt="" width="50px" height="50px">
+                <%= users[i]['username'] %>
+                <% if(users[i]['is_online'] == 1){ %>
+                    <sup class="online-status" id="<%= users[i]['._id']  %>-status">Online</sup>
+                <% } else { %>
+                    <sup class="offline-status" id="<%= users[i]['._id']  %>-status">Offline</sup>
+                <% } %>
+            </li>
+            <% } } %>
+        </ul>
+    </div>
+
+    <div class="col-md-8">
+        <h3 class="start-head">Click to Start the Chat</h3>
+        <div class="chat-section" id="chat-container">
+            <!-- Real-time messages will be dynamically updated here -->
+        </div>
+        <form action="" id="chat-form" class="mt-3">
+            <input type="text" name="message" placeholder="Type your message..." id="message" class="form-control" required>
+            <button type="submit" class="btn btn-info mt-2">Send Message</button>
+        </form>
+    </div>
+</div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="deleteChatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Delete Chat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form id="delete-chat-form">
+          <div class="modal-body">
+            <input type="hidden" name="id" id="delete-message-id">
+          <p>Are You Sure to delete below Message?</p>
+          <p> <b id="delete-message"></b></p>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+       </form>
+      </div>
+    </div>
+  </div>
+
+    <!--Update Modal -->
+    <div class="modal fade" id="editChatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Edit Chat</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+    
+            <form id="update-chat-form">
+              <div class="modal-body">
+                <input type="hidden" name="id" id="edit-message-id">
+                <input type="text" name="message" id="update-message" required placeholder="Enter Message" >
+              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+           </form>
+          </div>
+        </div>
+      </div>
+  
+
+
+
+<%- include('layouts/footer.ejs')%>
+
